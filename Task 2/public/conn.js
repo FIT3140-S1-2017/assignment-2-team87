@@ -41,14 +41,10 @@ $(function () {
     })
 
     $('#ClearData').on('click', function () {
-        motionRef.set({
-            long: 0,
-            short: 0,
-            total: 0
-        });
-        $('#lmotion').html();
-        $('#smotion').html();
-        $('#tmotion').html();
+        socket.emit('resetdb');
+        $('#lmotion').html("");
+        $('#smotion').html("");
+        $('#tmotion').html("");
     })
 
     // receiving from server

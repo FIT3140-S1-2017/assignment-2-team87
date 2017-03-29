@@ -17,9 +17,11 @@ admin.initializeApp({
 
 var db = admin.database();
 var ref = db.ref();
+var motionRef = ref.child("Motion");
 ref.once("value", function(snapshot) {
   console.log("snap: " + snapshot.val());
 });
+
 
 //server
 app.use(express.static(path.join(__dirname, '../public')))
@@ -86,7 +88,6 @@ function motionLen(state, mctr, socket) {
     socket.emit('totalMotion', sMotion + lMotion);
     //database reference to read and write data
     console.log("firebase stuff");
-	var motionRef = ref.child("Motion");
 	motionRef.update({
 		"long" : lMotion,
 		"short" : sMotion,
@@ -141,5 +142,15 @@ io.on('connection', function (socket) {
     socket.on('toggleSensor', function () {
         bool = !bool;
         writeToMotion(bool, socket);
+    })
+
+    //reset DB
+    socket.on('resetdb', function () {
+    	//reset
+    	motionRef.set({
+            long: 0,
+            short: 0,
+            total: 0
+        });
     })
 })
