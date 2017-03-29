@@ -43,8 +43,10 @@ var lenState = false;   //short or long motion state
 var mctr = 0;           //motion counter
 var lMotion = 0;        //long motion counter
 var sMotion = 0;        //short motion counter
+var intMotion = 0;		//number of intruders
 var bool = false;       //motion sensor state
-
+//array for intruder pattern
+var intruder = new Array; 
 
 //detect motion
 function updatePage(x, socket) {
@@ -74,25 +76,57 @@ function checkSensor(y, callback, socket) {
 
 //check motion length
 function motionLen(state, mctr, socket) {
-    if ((mctr > 2)) {
-        console.log("long motion");
+    if ((mctr > 3)) {
+    	if (intruder.length != 4){
+    		intruder.push("L");
+    	}
+    	else {
+    		console.log(intruder.toString());
+    		intruderCheck(socket);
+    		intruder.length = 0;
+    		intruder.push("L");
+    	}
+        //console.log("long motion");
         lMotion++;
         socket.emit('longMotion', lMotion);
     }
     else if (lenState) {
-        console.log("short motion");
+    	if (intruder.length != 4){
+    		intruder.push("S");
+    	}
+    	else {
+    		console.log(intruder.toString());
+    		intruderCheck(socket);
+    		intruder.length = 0;
+    		intruder.push("S");
+    	}
+        //console.log("short motion");
         sMotion++;
         socket.emit('shortMotion', sMotion);
     }
-    //total motions
-    socket.emit('totalMotion', sMotion + lMotion);
     //database reference to read and write data
-    console.log("firebase stuff");
 	motionRef.update({
 		"long" : lMotion,
-		"short" : sMotion,
-		"total" : lMotion + sMotion
+		"short" : sMotion
 	});
+}
+
+//check for instruder
+function intruderCheck(socket){
+	var intruderState = false;
+	if ((intruder[0] ==="L") && (intruder[2] === "L") && (intruder[3] === "L")){
+		intruderState = true;
+	}
+	if ((intruder[1] === "S") && intruderState){
+		console.log("Intruder Detected: " + intruder.toString());
+		intMotion++;
+    	socket.emit('totalMotion', intMotion);
+    	//database reference to read and write data
+		motionRef.update({
+			"total" : intMotion
+		});
+	}
+	
 }
 
 
