@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Assignment</title>
+</head>
+<body>
+
+
+
+    <div>
+        <header>IoT Control Panel</header>
+    </div>
+    <br />
+    
+    <h1 id="testData">Test Data Stuff</h1>
+
+    <div class="content">
+        <div class="label">
+            <label>Turn LED On/ Off</label>
+            <br />
+            <label>Turn Motion Sensor On/ Off</label>
+            <br />
+            <label>Short Motions</label>
+            <br />
+            <label>Long Motions</label>
+            <br />
+            <label>Total Motions</label>
+        </div>
+
+        <div class="info">
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider" id="OnLED"></span>
+            </label>
+            <br />
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider" id="OnMotion"></span>
+            </label>
+            <br />
+            <span id="short_motion">0</span>
+            <br />
+            <span id="long_motion">0</span>
+            <br />
+            <span id="total_motion">0</span>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBEbKIjSUgBV8WQQnBaYpsrWqBfDObJVxU",
+        authDomain: "beaglebone-ad06e.firebaseapp.com",
+        databaseURL: "https://beaglebone-ad06e.firebaseio.com",
+        storageBucket: "beaglebone-ad06e.appspot.com",
+        messagingSenderId: "225676518667"
+      };
+      firebase.initializeApp(config);
+
+      var test = document.getElementById('testData');
+      var dbRef = firebase.database().ref().child('testText');
+      dbRef.on('value', snap => test.innerText = snap.val());
+
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+            crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/conn.js"></script>
+</body>
+</html>
