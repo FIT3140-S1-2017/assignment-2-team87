@@ -16,9 +16,9 @@ admin.initializeApp({
 });
 
 var db = admin.database();
-var ref = db.ref("restricted_access/secret_document");
+var ref = db.ref();
 ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
+  console.log("snap: " + snapshot.val());
 });
 
 //server
@@ -84,6 +84,13 @@ function motionLen(state, mctr, socket) {
     }
     //total motions
     socket.emit('totalMotion', sMotion + lMotion);
+    //database reference to read and write data
+	var motionRef = ref.child("Motion");
+	motionRef.update({
+		"long" : lMotion,
+		"short" : sMotion,
+		"total" : lMotion + sMotion
+	});
 }
 
 
