@@ -85,6 +85,7 @@ function motionLen(state, mctr, socket) {
     //total motions
     socket.emit('totalMotion', sMotion + lMotion);
     //database reference to read and write data
+    console.log("firebase stuff");
 	var motionRef = ref.child("Motion");
 	motionRef.update({
 		"long" : lMotion,

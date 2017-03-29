@@ -5,14 +5,10 @@
 </head>
 <body>
 
-
-
     <div>
         <header>IoT Control Panel</header>
     </div>
     <br />
-    
-    <h1 id="testData">Test Data Stuff</h1>
 
     <div class="content">
         <div class="label">
@@ -25,6 +21,7 @@
             <label>Long Motions</label>
             <br />
             <label>Total Motions</label>
+            <br />
         </div>
 
         <div class="info">
@@ -43,29 +40,37 @@
             <span id="long_motion">0</span>
             <br />
             <span id="total_motion">0</span>
+            <br />
+            
         </div>
     </div>
 
+    <div class="content">
+        <br />
+        <button class="button" id="ClearData">Delete Old Data</button>
+        <button class="button" id="OldData">View Old Data</button>
+        <br />
+
+        <div class="label">
+            <label>Short Motions</label>
+            <br />
+            <label>Long Motions</label>
+            <br />
+            <label>Total Motions</label>
+            <br />
+        </div>
+        <div class="info">
+            <span id="smotion">0</span>
+            <br />
+            <span id="lmotion">0</span>
+            <br />
+            <span id="tmotion">0</span>
+            <br />
+        </div>
+        
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBEbKIjSUgBV8WQQnBaYpsrWqBfDObJVxU",
-        authDomain: "beaglebone-ad06e.firebaseapp.com",
-        databaseURL: "https://beaglebone-ad06e.firebaseio.com",
-        storageBucket: "beaglebone-ad06e.appspot.com",
-        messagingSenderId: "225676518667"
-      };
-      firebase.initializeApp(config);
-
-      var test = document.getElementById('testData');
-      var dbRef = firebase.database().ref().child('testText');
-      dbRef.on('value', snap => test.innerText = snap.val());
-
-    </script>
-
-    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
             crossorigin="anonymous"></script>
