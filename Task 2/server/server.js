@@ -83,7 +83,7 @@ function motionLen(state, mctr, socket) {
     	else {
     		console.log(intruder.toString());
     		intruderCheck(socket);
-    		intruder.length = 0;
+    		intruder.shift();
     		intruder.push("L");
     	}
         //console.log("long motion");
@@ -97,7 +97,7 @@ function motionLen(state, mctr, socket) {
     	else {
     		console.log(intruder.toString());
     		intruderCheck(socket);
-    		intruder.length = 0;
+    		intruder.shift();
     		intruder.push("S");
     	}
         //console.log("short motion");
