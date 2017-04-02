@@ -1,6 +1,6 @@
-# IoT Project (assignment 1)
+# Intruder Counter Project (assignment 2)
 
-This project makes use of a simple motion sensor, and LED and a BeagleBone Black in order to build a simple web server that detects motion and blinks the LED.
+This project makes use of a simple motion sensor, LED, Beaglebone Black and Firebase in order to build a real time intruder detection application.
 
 
 # Required Libraries for this project
@@ -9,8 +9,9 @@ This project makes use of a simple motion sensor, and LED and a BeagleBone Black
   - path (version 0.12.7 and up)
   - socket.io (version 1.7.3 and up)
   - bonescript (version 0.6.1)
+  - firebase admin SDK
   
-Note: Version 0.10.42 of Nodejs is required 
+Note: Version 0.12 or later of Nodejs is required 
 
 
 # Hardware Structure

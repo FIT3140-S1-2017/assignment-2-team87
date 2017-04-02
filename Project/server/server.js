@@ -3,9 +3,11 @@ var express = require('express')
 var app = express()
 var path = require('path')
 var bone = require('bonescript')
+
 //listen to port
 var server = app.listen(3001, function () { console.log('Listening on port 3001!') }) 
 var io = require('socket.io')(server)
+
 //firebase setup
 var admin = require("firebase-admin");
 var serviceAccount = require("./beaglebone-ad06e-firebase-adminsdk-ld6xo-89553811e8.json");
@@ -15,6 +17,7 @@ admin.initializeApp({
   databaseURL: "https://beaglebone-ad06e.firebaseio.com"
 });
 
+//global variables for firebase database reference
 var db = admin.database();
 var ref = db.ref();
 var motionRef = ref.child("Motion");

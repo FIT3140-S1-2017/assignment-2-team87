@@ -1,3 +1,4 @@
+//initializing firebase
 var config = {
         apiKey: "AIzaSyBEbKIjSUgBV8WQQnBaYpsrWqBfDObJVxU",
         authDomain: "beaglebone-ad06e.firebaseapp.com",
@@ -40,6 +41,7 @@ $(function () {
         });
     })
 
+    //clear previous data from firebase
     $('#ClearData').on('click', function () {
         socket.emit('resetdb');
         $('#lmotion').html("");
